@@ -9,8 +9,27 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         Statement stml = null;
 
-        DBConnect.dbConnect DB = new dbConnect();//Object from DB connect
-        DB.Connect2DB();//Connect to DB
+        DBConnect.dbConnect DB = new dbConnect();
+        stml = DB.Conn2DB();
+
+        String queryinsert="insert into userdetails values (23,'test','test@gmail.com','asdf',2)" ;
+        String query="select * from userdetails";
+        try{
+            stml.executeUpdate(queryinsert);
+            ResultSet rs= stml.executeQuery(query);
+            while(rs.next()){
+                int userID=rs.getInt("UserID");
+                String uName=rs.getString("UserName");
+                String uPassword=rs.getString("Password");
+
+                System.out.println("UserName:"+userID+" UserName:"+uName+" Password: "+uPassword);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+        DB.closeDB();
 
         System.out.print("Input Lecturer Name:");
         academic UPL = new academic();

@@ -1,10 +1,12 @@
 package DBConnect;
+import com.sun.org.apache.xpath.internal.SourceTree;
+
 import java.sql.*;
 public class dbConnect {
         //public String url = "localhost";
         public String url = "172.16.20.180";
         public String port = "3306"; //8889
-        public String database = "test";
+        public String database = "hacklnjava";
         public String user = "admin";
         public String password = "stcs";//root
         public String JDBC_DRIVER = "com.mysql.jdbc.Driver";
@@ -14,7 +16,6 @@ public class dbConnect {
         public void Connect2DB()
         {
             String DB_URL = "jdbc:mysql://"+url+":"+port+"/"+database;
-            Statement dbstmt=null;
             try {
                 conn = DriverManager.getConnection(DB_URL,user,password);//Connect
                 //dbstmt = conn.createStatement();
@@ -42,6 +43,14 @@ public class dbConnect {
             se.printStackTrace();
         }
         return dbstmt;
+    }
+    public void closeDB(){
+            try{
+                conn.close();
+                System.out.println("Connection closed");
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
     }
 
 }
