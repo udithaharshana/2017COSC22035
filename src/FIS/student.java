@@ -1,6 +1,6 @@
 package FIS;
 
-class student extends user {
+public class student extends user {
     String universityID;
     double GPA;
     int academicYr;

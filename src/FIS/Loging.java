@@ -1,8 +1,8 @@
+package FIS;
+
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.nio.file.attribute.UserDefinedFileAttributeView;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -14,6 +14,7 @@ public class Loging {
     private JPasswordField pwField1;
     private JButton exitButton;
     private JButton loginButton;
+    private student user = new student();
 
     public static JFrame loginFR= new JFrame("Loging");
 
@@ -53,7 +54,11 @@ public class Loging {
             ResultSet Rs= stml.executeQuery(query);
             Rs.first();
             inUsername=frUsername;
+            user.name=frUsername;
             inPW= Rs.getString("Password");
+            user.PW= inPW;
+            user.email= Rs.getString("Email");
+            user.NIC= Rs.getString("UserID");
 
         }catch (SQLException e) {
             e.printStackTrace();
@@ -64,7 +69,7 @@ public class Loging {
         if(frUsername.equals(inUsername)&& frPW.equals(inPW)) {
             JOptionPane.showMessageDialog(null, "Username and password is correct");
             loginFR.setVisible(false);
-            new userDetails(frUsername);
+            new userDetails(user);
 
         } else JOptionPane.showMessageDialog(null,"password or username incorrect");
     }
